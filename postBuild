@@ -1,5 +1,4 @@
 set -ex
 echo "Do Something"
 
-su -c whoami
-su -c touch /hallo
+gosu nobody:root bash -c 'whoami && id'
