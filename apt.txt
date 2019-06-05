@@ -1,1 +1,5 @@
 gosu
+man 
+manpages-posix
+
+

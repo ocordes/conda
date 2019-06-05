@@ -1,4 +1,0 @@
-set -ex
-echo "Do Something"
-
-gosu nobody:root bash -c 'whoami && id'
