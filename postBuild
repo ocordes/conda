@@ -1,2 +1,4 @@
 set -ex
 echo "Do Something"
+
+sudo -u root touch /hallo
