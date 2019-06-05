@@ -1,4 +1,5 @@
 set -ex
 echo "Do Something"
 
-sudo -u root touch /hallo
+su -c whoami
+su -c touch /hallo
