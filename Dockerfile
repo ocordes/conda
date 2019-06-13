@@ -62,13 +62,13 @@ ENV PATH ${NB_PYTHON_PREFIX}/bin:${CONDA_DIR}/bin:${NPM_DIR}/bin:${PATH}
 # If scripts required during build are present, copy them
 
 #COPY conda/install-miniconda.bash /tmp/install-miniconda.bash
-RUN wget "https://astro.uni-bonn.de/~ocordes/repo2docker/install-miniconda.bash" /tmp/install-miniconda.bash
+RUN wget https://astro.uni-bonn.de/~ocordes/repo2docker/install-miniconda.bash -O /tmp/install-miniconda.bash
 
 #COPY conda/activate-conda.sh /etc/profile.d/activate-conda.sh
-RUN wget "https://astro.uni-bonn.de/~ocordes/repo2docker/activate-conda.sh" /etc/profile.d/activate-conda.sh
+RUN wget https://astro.uni-bonn.de/~ocordes/repo2docker/activate-conda.sh -O /etc/profile.d/activate-conda.sh
 
 #COPY conda/environment.frozen.yml /tmp/environment.yml
-RUN wget "https://astro.uni-bonn.de/~ocordes/repo2docker/environment.frozen.yml" /tmp/environment.yml
+RUN wget https://astro.uni-bonn.de/~ocordes/repo2docker/environment.frozen.yml -O /tmp/environment.yml
 
 RUN mkdir -p ${NPM_DIR} && \
 chown -R ${NB_USER}:${NB_USER} ${NPM_DIR}
