@@ -1,7 +1,3 @@
-[Repo2Docker] Looking for repo2docker_config in /Users/ocordes/git/conda
-Picked Git content provider.
-Cloning into '/var/folders/kb/n3c46cyx53l5j65zzb6gvdjc0000gn/T/repo2dockerj5tfsix6'...
-
 FROM buildpack-deps:bionic
 
 # avoid prompts from apt
@@ -118,14 +114,7 @@ conda list -p ${NB_PYTHON_PREFIX} && \
 rm -rf /srv/conda/pkgs
 
 
-
-# Container image Labels!
-# Put these at the end, since we don't want to rebuild everything
-# when these change! Did I mention I hate Dockerfile cache semantics?
-
-LABEL repo2docker.version="0.9.0"
-LABEL repo2docker.repo="https://github.com/ocordes/conda"
-LABEL repo2docker.ref="None"
+# This is an image from ocordes
 
 # We always want containers to run as non-root
 USER ${NB_USER}
