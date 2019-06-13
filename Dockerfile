@@ -100,8 +100,15 @@ ENV PATH ${HOME}/.local/bin:${REPO_DIR}/.local/bin:${PATH}
 # Copy and chown stuff. This doubles the size of the repo, because
 # you can't actually copy as USER, only as root! Thanks, Docker!
 USER root
-COPY src/ ${REPO_DIR}
+COPY . ${REPO_DIR}
 RUN chown -R ${NB_USER}:${NB_USER} ${REPO_DIR}
+
+# fix the BUG in Ubuntu bionic image
+RUN sed -i '/path-exclude=\/usr\/share\/man\/*/c\#path-exclude=\/usr\/share\/man\/*' /etc/dpkg/dpkg.cfg.d/excludes && \
+  apt-get install --yes --no-install-recommends man manpages-posix && \
+  apt-get -qq purge && \
+  apt-get -qq clean 
+
 
 # Run assemble scripts! These will actually build the specification
 # in the repository into the image.
