@@ -105,6 +105,7 @@ RUN chown -R ${NB_USER}:${NB_USER} ${REPO_DIR}
 
 # fix the BUG in Ubuntu bionic image
 RUN sed -i '/path-exclude=\/usr\/share\/man\/*/c\#path-exclude=\/usr\/share\/man\/*' /etc/dpkg/dpkg.cfg.d/excludes && \
+  apt-get -qq update && \
   apt-get install --yes --no-install-recommends man manpages-posix && \
   apt-get -qq purge && \
   apt-get -qq clean 
