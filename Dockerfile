@@ -124,6 +124,7 @@ rm -rf /var/lib/apt/lists/*
 # Add entrypoint
 #COPY /repo2docker-entrypoint /usr/local/bin/repo2docker-entrypoint
 RUN wget https://astro.uni-bonn.de/~ocordes/repo2docker/repo2docker-entrypoint -O /usr/local/bin/repo2docker-entrypoint
+RUN chmod 755 /usr/local/bin/repo2docker-entrypoint
 
 USER ${NB_USER}
 RUN conda env update -p ${NB_PYTHON_PREFIX} -f "environment.yml" && \
