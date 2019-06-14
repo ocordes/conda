@@ -107,14 +107,15 @@ RUN chown -R ${NB_USER}:${NB_USER} ${REPO_DIR}
 RUN sed -i '/path-exclude=\/usr\/share\/man\/*/c\#path-exclude=\/usr\/share\/man\/*' /etc/dpkg/dpkg.cfg.d/excludes && \
   apt-get -qq update && \
   apt-get install --yes --no-install-recommends man manpages-posix && \
+  apt-get --reinstall install --yes bash && \
   apt-get -qq purge && \
   apt-get -qq clean 
 
 
 # Run assemble scripts! These will actually build the specification
 # in the repository into the image.
-RUN apt-get -qq update && \
-apt-get install --yes --no-install-recommends gosu man manpages-posix && \
+RUN test -f ${REPO_DIR}/apt.txt && apt-get -qq update && \
+apt-get install --yes --no-install-recommends `cat ${REPO_DIR}/apt.txt` && \
 apt-get -qq purge && \
 apt-get -qq clean && \
 rm -rf /var/lib/apt/lists/*
