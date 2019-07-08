@@ -128,11 +128,14 @@ RUN wget https://astro.uni-bonn.de/~ocordes/repo2docker/repo2docker-entrypoint -
 RUN chmod 755 /usr/local/bin/repo2docker-entrypoint
 
 USER ${NB_USER}
-RUN conda env update -p ${NB_PYTHON_PREFIX} -f "environment.yml" && \
-conda clean -tipsy && \
-conda list -p ${NB_PYTHON_PREFIX} && \
-rm -rf /srv/conda/pkgs
+RUN test -f ${REPO_DIR}/environment.yml && \
+  conda env update -p ${NB_PYTHON_PREFIX} -f ${REPO_DIR}/environment.yml && \
+  conda clean -tipsy && \
+  conda list -p ${NB_PYTHON_PREFIX} && \
+  rm -rf /srv/conda/pkgs
 
+
+RUN test -f ${REPO_DIR}/requirements.txt && pip install --no-cache-dir -r ${REPO_DIR}/requirements.txt
 
 # This is an image from ocordes
 
