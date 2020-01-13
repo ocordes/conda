@@ -1,4 +1,3 @@
-gosu
 man 
 manpages-posix
 
